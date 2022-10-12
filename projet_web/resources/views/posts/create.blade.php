@@ -44,22 +44,25 @@
                     <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Create Post</h1>
                 </div>
                 <div class="mt-6">
-                    <form action="/" method="post">
+                    <form action="/post/store" method="post">
 
                         @csrf
 
-                        <label for="post-title" class="block mb-2">Post Title</label>
-                        <input id="post-title" type="text" name="post-title" value="" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <label for="title" class="block mt-8 mb-2">Post Title</label>
+                        <input id="title" type="text" name="title" value="" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                        <label for="post-excerpt" class="block mt-8 mb-2">Post Excerpt</label>
-                        <textarea name="post-excerpt" id="post-excerpt" rows="5" class="w-full rounded-md border-gray-300 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                        <label for="thumbnail" class="block mt-8 mb-2">Post Thumbnail</label>
+                        <input id="thumbnail" type="text" name="thumbnail" value="" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
-                        <label for="post-body" class="block  mt-8 mb-2">Post Body</label>
+                        <label for="excerpt" class="block mt-8 mb-2">Post Excerpt</label>
+                        <textarea name="excerpt" id="excerpt" rows="5" class="w-full rounded-md border-gray-300 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+
+                        <label for="body" class="block  mt-8 mb-2">Post Body</label>
                         <p class="italic text-red-600"></p>
-                        <textarea name="post-body" id="post-body" rows="10" class="w-full rounded-md border-gray-300 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                        <textarea name="body" id="body" rows="10" class="w-full rounded-md border-gray-300 border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
 
-                        <label for="post-category" class="block mt-8 mb-2">Post Category</label>
-                        <select style="height: 200px;" name="post-category[]" id="post-category" class="w-full h-100px border gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple>
+                        <label for="category" class="block mt-8 mb-2">Post Category</label>
+                        <select style="height: 200px;" name="category[]" id="category" class="w-full h-100px border gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" multiple>
                             @foreach($categories as $category)
                                 <option value="{{$category->slug}}">
                                     {{$category->name}}

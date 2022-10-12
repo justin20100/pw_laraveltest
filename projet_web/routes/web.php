@@ -36,6 +36,9 @@ Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 Route::get('/post/create', [PostController::class, 'create'])->middleware('auth');
 Route::post('/post/store', [PostController::class, 'store'])->middleware('auth');
 
+
+//->can('create',Post::class)
+
 // Create user
 Route::get('/user/create', [UserController::class, 'create'])->middleware('guest');
 Route::post('/user/store', [UserController::class, 'store'])->middleware('guest');

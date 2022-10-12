@@ -45,9 +45,7 @@
                 </div>
                 <div class="mt-6">
                     <form action="/user/store" method="post">
-
                         @csrf
-
                         <label for="name" class="block mb-2">User name</label>
                         <input id="name" type="text" name="name" value="" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 

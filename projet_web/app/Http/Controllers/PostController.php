@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use DB;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use mysql_xdevapi\Table;
+use Str;
 
 class PostController extends Controller
 {
@@ -26,9 +29,9 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Application|Factory|View
     {
         $categories = Category::get();
         return view('posts.create',compact('categories'));
@@ -42,7 +45,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedPostData = $request->only('title', 'body', 'excerpt');
+        $validatedPostData['slug'] = Str::slug($validatedPostData['title']);
+        $validatedPostData['user_id'] = auth()->id();
+        $validatedCategoryId = $request->only('category_id');
+
+        $post = Post::create($validatedPostData);
+        foreach ($validatedCategoryId as $id) {
+            $post->categories()->attach($id);
+        }
+        return view('posts.show', compact('post'));
     }
 
     /**

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Events\PostCreated;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Post
@@ -45,10 +47,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $with = ['user', 'categories'];
     protected $withCount = ['comments'];
+    protected $fillable = ['title', 'body', 'excerpt', 'slug', 'user_id'];
+
+    public function getRouteKey()
+    {
+        return $this->slug;
+    }
 
     public function comments(): HasMany
     {
@@ -64,4 +72,8 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $dispatchesEvents = [
+        'created' => PostCreated::class,
+    ];
 }
