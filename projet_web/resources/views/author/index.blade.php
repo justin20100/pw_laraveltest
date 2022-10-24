@@ -56,7 +56,7 @@
                                             </a>
                                         @endforeach
                                     </div>
-                                    <h2 class="mt-2">
+                                     <h2 class="mt-2">
                                         <a href="/posts/{{ $post->slug }}"
                                            class="text-2xl font-bold text-gray-700 hover:underline">
                                             {{ $post->title }}
